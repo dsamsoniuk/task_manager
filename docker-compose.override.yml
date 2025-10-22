@@ -1,0 +1,17 @@
+
+services:
+  # Serwer MySQL
+  mysql_manager_task:
+    env_file:
+      - .env
+    # environment:
+    #   MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # default z .env
+    #   MYSQL_DATABASE: ${MYSQL_DATABASE}
+    #   MYSQL_USER: ${MYSQL_USER}
+    #   MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  # mysqltest_manager_task:
+  #   env_file:
+  #     - .env.test
+  php_manager_task:
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # wymagane dla debugera - przy uzyciu zewnetrznym vscode
