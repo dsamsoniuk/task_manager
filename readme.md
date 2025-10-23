@@ -1,7 +1,7 @@
 
 
 # Task manager
-laravel + vue
+laravel + vue + inertia
 
 Application allow to save notes, informations
 

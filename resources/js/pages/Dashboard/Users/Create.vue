@@ -40,8 +40,12 @@
 import { useForm } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Link } from '@inertiajs/vue3'
-import UserForm from '@/forms/UserForm'
-const form = useForm(new UserForm())
+const form = useForm({
+    id: '',
+    name: '',
+    email: '',
+    password: '',
+})
 
 function submit() {
   form.post('/dashboard/users')
