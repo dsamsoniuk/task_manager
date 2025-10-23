@@ -29,6 +29,7 @@ class StoreProjectRequest extends FormRequest
                 new AssertRequired(), 
                 new AssertLength(3)
             ), 
+            'description' => Constrains::create(), 
         ];
     }
 }

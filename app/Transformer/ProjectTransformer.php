@@ -15,6 +15,7 @@ class ProjectTransformer implements ProjectTransformerInterface
         $project = new ProjectDto(
             $data['id'] ?? '',
             $data['name'] ?? '',
+            $data['description'] ?? '',
         );
         return $project;
     }

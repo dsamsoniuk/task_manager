@@ -14,6 +14,13 @@
             </fieldset>
           </div>
 
+          <div>
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend">Opis</legend>
+              <textarea v-model="form.description" class="input" placeholder="description" rows="100"></textarea>
+            </fieldset>
+          </div>
+
           <button type="submit" class="btn btn-primary mt-4">Zaktualizuj</button>
         </form>
       </div>
@@ -31,6 +38,7 @@ const props = defineProps({
 
 const form = useForm({
   name: props.project.name,
+  description: props.project.description,
 })
 
 function submit() {

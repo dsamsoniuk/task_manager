@@ -56,5 +56,5 @@ php artisan db:seed ProjectSeeder
 
 ```
 php artisan migrate
-php artisan migrate
+php artisan make:migration add_some_column
 ```
