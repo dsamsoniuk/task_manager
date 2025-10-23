@@ -5,6 +5,8 @@ laravel + vue + inertia
 
 Application allow to save notes, informations
 
+![screen](screen.png "screen")
+
 
 ### Project start
 
