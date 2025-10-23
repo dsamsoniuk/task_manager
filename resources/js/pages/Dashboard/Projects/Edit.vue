@@ -13,6 +13,12 @@
               <input v-model="form.name" type="text" class="input" placeholder="Nazwa"/>
             </fieldset>
           </div>
+          <div>
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend">Priorytet</legend>
+              <input v-model="form.priority" type="number" class="input" placeholder="priority"/>
+            </fieldset>
+          </div>
 
           <div>
             <fieldset class="fieldset">
@@ -39,6 +45,7 @@ const props = defineProps({
 const form = useForm({
   name: props.project.name,
   description: props.project.description,
+  priority: props.project.priority,
 })
 
 function submit() {

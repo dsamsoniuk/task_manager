@@ -7,6 +7,7 @@ class ProjectDto {
         public string $id = '', 
         public string $name = '', 
         public string $description = '', 
+        public int $priority = 0, 
     ){}
 
 }

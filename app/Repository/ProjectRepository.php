@@ -22,7 +22,7 @@ class ProjectRepository implements ProjectRepositoryInterface
     }
     public function findByLimit(int $limit = 10): LengthAwarePaginator {
         return (new QueryBuilder())
-            ->select(Project::class, 'id', 'name')
+            ->select(Project::class, 'id', 'name', 'priority')
             ->paginate($limit);
     }
 }

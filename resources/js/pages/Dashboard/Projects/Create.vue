@@ -16,6 +16,13 @@
 
           <div>
             <fieldset class="fieldset">
+              <legend class="fieldset-legend">Priorytet</legend>
+              <input v-model="form.priority" type="number" class="input" placeholder="priority"/>
+            </fieldset>
+          </div>
+          
+          <div>
+            <fieldset class="fieldset">
               <legend class="fieldset-legend">Opis</legend>
               <textarea v-model="form.description" class="input" placeholder="description" rows="100"></textarea>
             </fieldset>

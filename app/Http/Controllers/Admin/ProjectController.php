@@ -53,7 +53,6 @@ class ProjectController extends Controller
 
     public function showNotes(Project $project, NoteRepositoryInterface $noteRepo)
     {
-        $id = $project->id;
         $notes = $noteRepo->findByVisiblity(true, $project->id);
 
         return Inertia::render('Dashboard/Projects/ShowNotes', [
@@ -75,7 +74,7 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProjectRequest $request, Project $project)
+    public function update(StoreProjectRequest $request, Project $project)
     {
         $userDto = $this->projectTransform->toDto($request->validated());
         $this->projectRepo->update($project, $userDto);

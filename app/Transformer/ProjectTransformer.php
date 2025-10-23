@@ -12,6 +12,7 @@ class ProjectTransformer implements ProjectTransformerInterface
             $data['id'] ?? '',
             $data['name'] ?? '',
             $data['description'] ?? '',
+            $data['priority'] ?? '',
         );
         return $project;
     }

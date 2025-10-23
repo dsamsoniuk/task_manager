@@ -50,7 +50,7 @@ class HandleInertiaRequests extends Middleware
                 'success' => fn () => $request->session()->get('success'),
                 'error'   => fn () => $request->session()->get('error'),
             ],
-            'projectList' => fn() =>\App\Models\Project::select('id', 'name')->get()->toArray(),
+            'projectList' => fn() =>\App\Models\Project::select('id', 'name')->orderBy('priority', 'desc')->get()->toArray(),
         ];
     }
 }

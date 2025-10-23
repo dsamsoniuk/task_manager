@@ -30,6 +30,7 @@ class StoreProjectRequest extends FormRequest
                 new AssertLength(3)
             ), 
             'description' => Constrains::create(), 
+            'priority' => Constrains::create(), 
         ];
     }
 }

@@ -13,6 +13,7 @@ class Project extends Model
     protected $fillable = [
         'name',
         'description',
+        'priority',
     ];
     public function notes() {
         return $this->hasMany(Note::Class);

@@ -11,13 +11,14 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>ID</th><th>Nazwa</th><th>Akcje</th>
+                  <th>ID</th><th>Nazwa</th><th>priority</th><th>Akcje</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="project in projects.data" :key="project.id">
                   <td>{{ project.id }}</td>
                   <td>{{ project.name }}</td>
+                  <td>{{ project.priority }}</td>
                   <td>
                     <Link :href="`/dashboard/projects/${project.id}/edit`" class="text-blue-500">Edytuj</Link>
                     <button type="button" @click="destroy(project.id)" class="text-red-500 ml-2 cursor-pointer">Usuń</button>
