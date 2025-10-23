@@ -1,9 +1,8 @@
-
-
 # Task manager
+
 laravel + vue + inertia
 
-Application allow to save notes, informations
+Aplikacja na potrzeby zapisu informacji do projektów, jak zadania lub noty
 
 ![screen](screen.png "screen")
 
@@ -15,6 +14,8 @@ start docker
 ```
 docker compose up
 ```
+
+available server: http://localhost:99
 
 migracja
 
