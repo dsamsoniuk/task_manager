@@ -28,15 +28,19 @@ class NoteRepository implements NoteRepositoryInterface
             ->orderBy('updated_at','desc')
             ->paginate($limit);
     }
-    public function findByVisiblity(int $isVisible = 1): Collection {
-        return (new QueryBuilder())
+    public function findByVisiblity(int $isVisible = 1, int $project_id = null): Collection {
+        $query = (new QueryBuilder())
             ->select(Note::class, 'id', 'title', 'description','priority','project_id')
-            ->where('is_visible', '=', ':isVisible')
-            ->setBindings([
-                'isVisible' => $isVisible
-            ])
+            ->where('is_visible', '=', '?');
+
+          if ($project_id) {
+            $query->where('project_id', '=', '?');
+          }
+
+          $query->setBindings([$isVisible, $project_id]);
+
+          return $query
             ->orderBy('priority','desc')
-            ->get()
-          ;
+            ->get();
     }
 }

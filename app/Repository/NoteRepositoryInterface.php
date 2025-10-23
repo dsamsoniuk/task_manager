@@ -11,5 +11,5 @@ interface NoteRepositoryInterface{
     public function update(Note $note, NoteDto $noteDto): void;
     public function delete(Note $note): void;
     public function findByLimit(int $limit = 10): LengthAwarePaginator;
-    public function findByVisiblity(int $isVisible = 1): Collection ;
+    public function findByVisiblity(int $isVisible = 1, int $project_id = null): Collection ;
 }

@@ -53,7 +53,8 @@ class ProjectController extends Controller
 
     public function showNotes(Project $project, NoteRepositoryInterface $noteRepo)
     {
-        $notes = $noteRepo->findByVisiblity();
+        $id = $project->id;
+        $notes = $noteRepo->findByVisiblity(true, $project->id);
 
         return Inertia::render('Dashboard/Projects/ShowNotes', [
             'notes' => $notes,

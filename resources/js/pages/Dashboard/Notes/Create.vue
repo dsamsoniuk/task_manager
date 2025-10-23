@@ -1,7 +1,7 @@
 <template>
   <AppLayout>
   <div class="m-4">
-        <Link :href="`/dashboard/projects`" class="text-blue-500">powrót</Link>
+        <Link :href="`/dashboard/project-notes/${project.id}`" class="text-blue-500">powrót</Link>
 
     <h1 class="text-xl font-bold mb-4">Nowa nota</h1>
 
@@ -17,7 +17,7 @@
           <div>
             <fieldset class="fieldset">
               <legend class="fieldset-legend">Opis</legend>
-              <textarea v-model="form.description" class="input" placeholder="description" rows="100"></textarea>
+              <textarea v-model="form.description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 " placeholder="description" rows="15" cols="33"></textarea>
               <span class="text-red-500">{{ form.errors.description }}</span>
 
             </fieldset>

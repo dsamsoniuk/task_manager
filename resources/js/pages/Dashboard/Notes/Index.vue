@@ -4,7 +4,7 @@
       <div class="m-4 overflow-x-auto">
         <h1 class="text-xl font-bold mb-4">Noty</h1>
 
-        <Link href="/dashboard/notes/create" class="btn btn-primary">Dodaj</Link>
+        <!-- <Link href="/dashboard/notes/create" class="btn btn-primary">Dodaj</Link> -->
         <FlashMessage />
 
         <div class="">

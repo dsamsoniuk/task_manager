@@ -4,10 +4,7 @@
       <div class="m-4 overflow-x-auto">
         <div class="border p-4">
           <h1 class="text-xl font-bold mb-4 border-b pb-2">{{ project.name }}</h1>
-          <h4 class="mb-4 text-[grey]">Przypisane noty</h4>
-          <div class="">
-            <h4>{{ project.description }}</h4>
-          </div>
+          <h4 class="mb-4 text-[grey]">{{ project.description }}</h4>
         </div>
 
         <FlashMessage />
