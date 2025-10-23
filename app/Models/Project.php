@@ -14,4 +14,7 @@ class Project extends Model
         'name',
         'description',
     ];
+    public function notes() {
+        return $this->hasMany(Note::Class);
+    }
 }

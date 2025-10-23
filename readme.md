@@ -57,4 +57,11 @@ php artisan db:seed ProjectSeeder
 ```
 php artisan migrate
 php artisan make:migration add_some_column
+
+```
+
+rollback 1 migration file
+
+```
+php artisan migrate:rollback --step=1
 ```

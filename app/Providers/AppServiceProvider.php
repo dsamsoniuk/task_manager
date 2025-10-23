@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repository\NoteRepository;
+use App\Repository\NoteRepositoryInterface;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectRepositoryInterface;
+use App\Transformer\NoteTransformer;
+use App\Transformer\NoteTransformerInterface;
 use App\Transformer\ProjectTransformer;
 use App\Transformer\ProjectTransformerInterface;
 use App\Transformer\UserTransformer;
@@ -25,10 +29,14 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(ConstrainsInterface::class, Constrains::class);
         $this->app->bind(PasswordServiceInterface::class, PasswordService::class);
+
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(ProjectRepositoryInterface::class, ProjectRepository::class);
+        $this->app->bind(NoteRepositoryInterface::class, NoteRepository::class);
+
         $this->app->bind(UserTransformerInterface::class, UserTransformer::class);
         $this->app->bind(ProjectTransformerInterface::class, ProjectTransformer::class);
+        $this->app->bind(NoteTransformerInterface::class, NoteTransformer::class);
     }
 
     /**

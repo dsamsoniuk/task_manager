@@ -19,6 +19,9 @@ import AppLogo from './AppLogo.vue';
 import users from '@/routes/dashboard/users';
 import projects from '@/routes/dashboard/projects';
 import { usePage } from '@inertiajs/vue3'
+import notes from '@/routes/dashboard/notes';
+import projectNotes from '@/routes/project-notes';
+import SidebarGroupLabel from './ui/sidebar/SidebarGroupLabel.vue';
 
 const page = usePage()
 const mainNavItems: NavItem[] = [
@@ -34,6 +37,10 @@ const mainNavItems: NavItem[] = [
         title: 'Projects',
         href: projects.index(),
         icon: LayoutGrid,
+    },{
+        title: 'Notes',
+        href: notes.index(),
+        icon: LayoutGrid,
     }
 ];
 
@@ -44,7 +51,7 @@ if (projectList) {
         const pro = projectList[p]
         mainNavProjectsItems.push({
             title: pro.name,
-            href: projects.edit(pro.id),
+            href: projectNotes.showNotes(pro.id),
             icon: Folder,
         })
     }
@@ -79,14 +86,14 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
+            <SidebarGroupLabel>Menu</SidebarGroupLabel>
             <NavMain :items="mainNavItems" />
-        </SidebarContent>
-
-        <SidebarContent>
+            <SidebarGroupLabel>Projekty</SidebarGroupLabel>
             <NavMain :items="mainNavProjectsItems" />
         </SidebarContent>
 
         <SidebarFooter>
+            <SidebarGroupLabel>Footer</SidebarGroupLabel>
             <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>

@@ -14,6 +14,12 @@
             </fieldset>
           </div>
 
+          <div>
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend">Opis</legend>
+              <textarea v-model="form.description" class="input" placeholder="description" rows="100"></textarea>
+            </fieldset>
+          </div>
 
       <button type="submit" class="btn btn-primary mt-4">Zapisz</button>
     </form>
@@ -28,7 +34,7 @@ import { Link } from '@inertiajs/vue3'
 
 const form = useForm({
   name: '',
-
+  description: '',
 })
 
 function submit() {

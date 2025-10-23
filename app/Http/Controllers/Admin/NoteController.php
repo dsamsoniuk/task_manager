@@ -1,0 +1,109 @@
+<?php 
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Requests\StoreNoteRequest;
+use App\Http\Requests\UpdateNoteRequest;
+use App\Models\Note;
+use App\Models\Project;
+use App\Repository\NoteRepositoryInterface;
+use App\Transformer\NoteTransformerInterface;
+use Inertia\Inertia;
+use App\Http\Controllers\Controller;
+
+class NoteController extends Controller
+{
+    public function __construct(
+        private NoteRepositoryInterface $noteRepo,
+        private NoteTransformerInterface $noteTransformer,
+    ){
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $notes = $this->noteRepo->findByLimit(10);
+
+        return Inertia::render('Dashboard/Notes/Index', [
+            'notes' => $notes,
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function createByProject(Project $project)
+    {
+        return Inertia::render('Dashboard/Notes/Create',[
+            'project' => $project
+        ]);
+    }
+    /**
+     * Show the form for creating a new resource.
+     */
+    // public function create()
+    // {
+    //     return Inertia::render('Dashboard/Notes/Create');
+    // }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreNoteRequest $request)
+    {
+        $userDto = $this->noteTransformer->toDto($request->validated());
+        $note = $this->noteRepo->create($userDto);
+
+        return redirect()
+            ->route('project-notes.showNotes', [
+                'project' => $note->project
+            ])
+            ->with('success', 'Nota dodana!');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Note $note)
+    {
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Note $note)
+    {
+        return Inertia::render('Dashboard/Notes/Edit', [
+            'note' => $note,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateNoteRequest $request, Note $note)
+    {
+        $userDto = $this->noteTransformer->toDto($request->validated());
+        $this->noteRepo->update($note, $userDto);
+
+        return redirect()
+                ->route('project-notes.showNotes', [
+                'project' => $note->project
+            ])
+            ->with('success', 'Nota zaktualizowany!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Note $note)
+    {
+        $this->noteRepo->delete($note);
+
+        return redirect()
+            ->route('dashboard.notes.index')
+            ->with('success', 'Nota usunięty!');
+    }
+}
