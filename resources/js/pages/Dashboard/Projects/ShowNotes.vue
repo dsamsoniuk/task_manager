@@ -69,7 +69,6 @@ const noteList = ref({ ...props.notes})
 
 async function loadNotesByPage(data) {
   data.query = searchInput.value ?? ''
-  console.log(data)
   try {
     const query = data.query ? `?q=${data.query}` : ''
     const response = await axios.get(`/dashboard/project-notes/${props.project.id}/by-page/${data.page}/${query}`)

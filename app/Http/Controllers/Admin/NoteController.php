@@ -25,14 +25,17 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = $this->noteRepo->findByLimit(limit: 2);
+        $limit = env('LIMIT_ITEMS_BY_PAGE', '10');
+        $notes = $this->noteRepo->findByLimit(limit: $limit);
         return Inertia::render('Dashboard/Notes/Index', [
             'notes' => $notes
         ]);
     }
     public function indexByPage(int $page = 1)
     {
-        $notes = $this->noteRepo->findByLimit(page: $page, limit: 2);
+        $limit = env('LIMIT_ITEMS_BY_PAGE', '10');
+
+        $notes = $this->noteRepo->findByLimit(page: $page, limit: $limit);
         return ['notes' => $notes];
     }
 

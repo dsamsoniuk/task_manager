@@ -54,10 +54,11 @@ class ProjectController extends Controller
 
     public function showNotes(Project $project, NoteRepositoryInterface $noteRepo)
     {
+        $limit = env('LIMIT_ITEMS_BY_PAGE', '10');
         $notes = $noteRepo->findByVisiblity(
             isVisible: true, 
             project_id:$project->id, 
-            limit: 50
+            limit: $limit
         );
 
         return Inertia::render('Dashboard/Projects/ShowNotes', [
@@ -71,13 +72,15 @@ class ProjectController extends Controller
         NoteRepositoryInterface $noteRepo,
         int $page = 1
     ){
+        
+        $limit = env('LIMIT_ITEMS_BY_PAGE', '10');
         $query = $request->get('q', '');
         $notes = $noteRepo->findByVisiblity(
             true, 
             $project->id, 
             $query,
             $page, 
-            50
+            $limit
         );
         return ['notes' => $notes];
     }
