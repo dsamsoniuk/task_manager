@@ -17,13 +17,10 @@
           <summary class="collapse-title font-semibold">
                
             <div class="flex justify-between items-center p-4">
-              <!-- Lewa strona -->
               <h1 class="text-xl font-bold text-gray-800">{{ note.title }}</h1>
 
-              <!-- Prawa strona -->
               <div class="flex space-x-4">
                 <Link :href="`/dashboard/notes/${note.id}/edit`" class="text-green-600 hover:underline">Edytuj</Link>
-                <!-- <Link :href="`/dashboard/notes/${note.id}/edit`" class="text-green-600 hover:underline">Ukryj</Link> -->
                 <div>priorytet: {{ note.priority }}</div>
                 <button type="button" @click="hide(note.id)" class="text-orange-600 hover:underline">Ukryj</button>
                 <button type="button" @click="destroy(note.id)" class="text-red-600 hover:underline">Usuń</button>
@@ -72,12 +69,14 @@ async function loadNotesByPage(data) {
 function destroy(id) {
   if (confirm('Na pewno chcesz usunąć?')) {
     router.delete(`/dashboard/notes/${id}`)
+    loadNotesByPage({page: noteList.value.current_page})
   }
 }
 
 function hide(id) {
   if (confirm('Na pewno chcesz ukryć?')) {
     router.put(`/dashboard/notes/${id}/hide`)
+    loadNotesByPage({page: noteList.value.current_page})
   }
 }
 
