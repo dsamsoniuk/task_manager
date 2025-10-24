@@ -38,6 +38,7 @@ Route::prefix('dashboard/project-notes')
     ->middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/{project}', [ProjectController::class, 'showNotes'])->name('showNotes');
+        Route::get('/{project}/by-page/{page}', [ProjectController::class, 'notesByPage'])->name('notesByPage');
     });
 
 Route::prefix('dashboard/notes/create-by-project')

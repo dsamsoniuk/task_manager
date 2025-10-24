@@ -13,7 +13,7 @@
           <Link :href="`/dashboard/notes/create-by-project/${project.id }`" class="btn btn-accent">Dodaj note</Link>
         </div>
 
-        <details v-for="note in notes.data" :key="note.id" class="collapse bg-base-100 border-base-300 border mb-2" >
+        <details v-for="note in noteList.data" :key="note.id" class="collapse bg-base-100 border-base-300 border mb-2" >
           <summary class="collapse-title font-semibold">
                
             <div class="flex justify-between items-center p-4">
@@ -39,10 +39,12 @@
           <Link :href="`/dashboard/notes/create-by-project/${project.id }`" class="btn btn-accent">Dodaj note</Link>
         </div>
           <Pagination 
-            :base-url="props.notes.path" 
-            :current-page="props.notes.current_page" 
-            :total-pages="props.notes.last_page" 
+            :base-url="noteList.path" 
+            :current-page="noteList.current_page" 
+            :total-pages="noteList.last_page"
+            @run-parent-fn="loadNotesByPage"
           />
+
       </div>
   </AppLayout>
 </template>
@@ -52,9 +54,21 @@ import { Link, router } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/AppLayout.vue';
 import  FlashMessage  from '@/components/FlashMessage.vue'
 import Pagination from '@/components/Pagination.vue'
+import { ref } from 'vue';
+import axios from 'axios'
 
 const props = defineProps({ notes: Object, project: Object})
-console.log(props.notes)
+const noteList = ref({ ...props.notes})
+
+async function loadNotesByPage(data) {
+  try {
+    const response = await axios.get(`/dashboard/project-notes/${props.project.id}/by-page/${data.page}`)
+    noteList.value = response.data.notes
+  } catch (err) {
+    console.log('Nie udało się pobrać danych.')
+  }
+}
+
 function destroy(id) {
   if (confirm('Na pewno chcesz usunąć?')) {
     router.delete(`/dashboard/notes/${id}`)

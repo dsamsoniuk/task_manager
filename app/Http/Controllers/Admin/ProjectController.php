@@ -71,6 +71,18 @@ class ProjectController extends Controller
             'project' => $project,
         ]);
     }
+    public function notesByPage(Project $project, int $page = 1, NoteRepositoryInterface $noteRepo){
+
+        $notes = $noteRepo->findByVisiblity(
+            true, 
+            $project->id, 
+            $page, 
+            50
+        );
+        return [
+            'notes' => $notes
+        ];
+    }
 
     /**
      * Show the form for editing the specified resource.
