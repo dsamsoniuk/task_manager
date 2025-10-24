@@ -26,13 +26,19 @@ class NoteRepository implements NoteRepositoryInterface
     {
         $note->update(['is_visible' => false]);
     }
-    public function findByLimit(int $limit = 10): LengthAwarePaginator {
+    public function findByLimit(int $limit = 10, int $page = null) {
         return (new QueryBuilder())
             ->select(Note::class, 'id', 'title', 'is_visible')
             ->orderBy('updated_at','desc')
-            ->paginate($limit);
+            ->paginate(page: $page, perPage : $limit);
     }
-    public function findByVisiblity(int $isVisible = 1, int $project_id = null): Collection {
+    public function findByVisiblity(
+        int $isVisible = 1, 
+        int $project_id = null,
+        int $page = 1,
+        int $limit = 10
+    ) 
+    {
         $query = (new QueryBuilder())
             ->select(Note::class, 'id', 'title', 'description','priority','project_id')
             ->where('is_visible', '=', '?');
@@ -45,6 +51,9 @@ class NoteRepository implements NoteRepositoryInterface
 
           return $query
             ->orderBy('priority','desc')
-            ->get();
+            ->paginate(
+                page: $page, 
+                perPage: $limit
+            );
     }
 }

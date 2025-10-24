@@ -22,13 +22,18 @@
 
                   <td>
                     <Link :href="`/dashboard/notes/${note.id}/edit`" class="text-blue-500">Edytuj</Link>
-                    <button type="button" @click="destroy(note.id)" class="text-red-500 ml-2 cursor-pointer">Usuń</button>
+                    <button type="button" @click="destroy()" class="text-red-500 ml-2 cursor-pointer">Usuń</button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
 
+          <Pagination 
+            :base-url="props.notes.path" 
+            :current-page="props.notes.current_page" 
+            :total-pages="props.notes.last_page" 
+          />
       </div>
   </AppLayout>
 </template>
@@ -37,9 +42,10 @@
 import { Link, router } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/AppLayout.vue';
 import  FlashMessage  from '@/components/FlashMessage.vue'
+import Pagination from '@/components/Pagination.vue'
+
 
 const props = defineProps({ notes: Object})
-
 function destroy(id) {
   if (confirm('Na pewno chcesz usunąć?')) {
     router.delete(`/dashboard/notes/${id}`)

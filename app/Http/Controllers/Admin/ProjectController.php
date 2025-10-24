@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Repository\NoteRepositoryInterface;
 use App\Repository\ProjectRepositoryInterface;
 use App\Transformer\ProjectTransformerInterface;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -51,9 +52,19 @@ class ProjectController extends Controller
             ->with('success', 'Użytkownik dodany!');
     }
 
-    public function showNotes(Project $project, NoteRepositoryInterface $noteRepo)
+    public function showNotes(
+        Request $request, 
+        Project $project, 
+        NoteRepositoryInterface $noteRepo
+    )
     {
-        $notes = $noteRepo->findByVisiblity(true, $project->id);
+        $page = (int) $request->get('page', 1);
+        $notes = $noteRepo->findByVisiblity(
+            true, 
+            $project->id, 
+            $page, 
+            2
+        );
 
         return Inertia::render('Dashboard/Projects/ShowNotes', [
             'notes' => $notes,

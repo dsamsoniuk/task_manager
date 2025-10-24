@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Repository\NoteRepositoryInterface;
 use App\Repository\ProjectRepositoryInterface;
 use App\Transformer\NoteTransformerInterface;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 
@@ -23,12 +24,13 @@ class NoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $notes = $this->noteRepo->findByLimit(10);
+        $page = (int) $request->get('page', 0);
+        $notes = $this->noteRepo->findByLimit(page: $page, limit: 10);
 
         return Inertia::render('Dashboard/Notes/Index', [
-            'notes' => $notes,
+            'notes' => $notes
         ]);
     }
 
@@ -43,13 +45,6 @@ class NoteController extends Controller
             'projectList' => $projectList,
         ]);
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    // public function create()
-    // {
-    //     return Inertia::render('Dashboard/Notes/Create');
-    // }
 
     /**
      * Store a newly created resource in storage.
@@ -65,14 +60,6 @@ class NoteController extends Controller
             ])
             ->with('success', 'Nota dodana!');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    // public function show(Note $note)
-    // {
-
-    // }
 
     /**
      * Show the form for editing the specified resource.

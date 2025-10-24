@@ -13,7 +13,7 @@
           <Link :href="`/dashboard/notes/create-by-project/${project.id }`" class="btn btn-accent">Dodaj note</Link>
         </div>
 
-        <details v-for="note in notes" :key="note.id" class="collapse bg-base-100 border-base-300 border mb-2" >
+        <details v-for="note in notes.data" :key="note.id" class="collapse bg-base-100 border-base-300 border mb-2" >
           <summary class="collapse-title font-semibold">
                
             <div class="flex justify-between items-center p-4">
@@ -37,10 +37,12 @@
 
         <div class="m-3">
           <Link :href="`/dashboard/notes/create-by-project/${project.id }`" class="btn btn-accent">Dodaj note</Link>
-          <Link :href="`/dashboard/notes/create-by-project/${project.id }`" class="btn btn-accent">Usuń note</Link>
-
         </div>
-        
+          <Pagination 
+            :base-url="props.notes.path" 
+            :current-page="props.notes.current_page" 
+            :total-pages="props.notes.last_page" 
+          />
       </div>
   </AppLayout>
 </template>
@@ -49,9 +51,10 @@
 import { Link, router } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/AppLayout.vue';
 import  FlashMessage  from '@/components/FlashMessage.vue'
+import Pagination from '@/components/Pagination.vue'
 
 const props = defineProps({ notes: Object, project: Object})
-
+console.log(props.notes)
 function destroy(id) {
   if (confirm('Na pewno chcesz usunąć?')) {
     router.delete(`/dashboard/notes/${id}`)
