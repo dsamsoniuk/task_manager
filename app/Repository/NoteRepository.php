@@ -35,19 +35,22 @@ class NoteRepository implements NoteRepositoryInterface
     public function findByVisiblity(
         int $isVisible = 1, 
         int $project_id = null,
+        string $search = '',
         int $page = 1,
         int $limit = 10
     ) 
     {
         $query = (new QueryBuilder())
             ->select(Note::class, 'id', 'title', 'description','priority','project_id')
-            ->where('is_visible', '=', '?');
+            ->where('is_visible', '=', $isVisible);
 
-          if ($project_id) {
-            $query->where('project_id', '=', '?');
-          }
-
-          $query->setBindings([$isVisible, $project_id]);
+        if ($project_id) {
+            $query->where('project_id', '=', $project_id);
+        }
+ 
+        if ($search != '') {
+            $query->where('title', 'like', "%{$search}%");
+        }
 
           return $query
             ->orderBy('priority','desc')

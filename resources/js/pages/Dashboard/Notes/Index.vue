@@ -15,7 +15,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="note in notes.data" :key="note.id">
+                <tr v-for="note in noteList.data" :key="note.id">
                   <td>{{ note.id }}</td>
                   <td>{{ note.title }}</td>
                  <td>{{ note.is_visible ? 'Tak' : 'Nie' }}</td>
@@ -30,9 +30,9 @@
           </div>
 
           <Pagination 
-            :base-url="props.notes.path" 
-            :current-page="props.notes.current_page" 
-            :total-pages="props.notes.last_page" 
+            :current-page="noteList.current_page" 
+            :total-pages="noteList.last_page"
+            @run-parent-fn="loadNotesByPage"
           />
       </div>
   </AppLayout>
@@ -43,12 +43,24 @@ import { Link, router } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/AppLayout.vue';
 import  FlashMessage  from '@/components/FlashMessage.vue'
 import Pagination from '@/components/Pagination.vue'
-
+import { ref } from 'vue';
+import axios from 'axios'
 
 const props = defineProps({ notes: Object})
+const noteList = ref({ ...props.notes})
+
 function destroy(id) {
   if (confirm('Na pewno chcesz usunąć?')) {
     router.delete(`/dashboard/notes/${id}`)
+  }
+}
+
+async function loadNotesByPage(data) {
+  try {
+    const response = await axios.get(`/dashboard/notes/by-page/${data.page}`)
+    noteList.value = response.data.notes
+  } catch (err) {
+    console.log('Nie udało się pobrać danych.')
   }
 }
 </script>

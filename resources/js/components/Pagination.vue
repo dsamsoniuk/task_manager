@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 const props = defineProps({
-    baseUrl: { type: String , required: true},
     currentPage: { type: Number, required: true},
     totalPages: { type: Number, required: true},
 })
@@ -22,7 +21,9 @@ function triggerParent(page: number) {
       class="px-3 py-1 rounded border text-sm"
       :class="currentPage === 1 ? 'text-gray-400 border-gray-200' : 'hover:bg-gray-100'"
         @click="triggerParent(currentPage - 1)"
-      >← Poprzednia</button>
+      >
+        ← Poprzednia
+      </button>
 
     <!-- Numery stron -->
     <template v-for="page in totalPages" :key="page">

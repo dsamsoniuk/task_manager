@@ -53,6 +53,7 @@ Route::prefix('dashboard/notes')
     ->middleware(['auth', 'verified'])
     ->group(function () {
         Route::put('/{note}/hide', [NoteController::class, 'hide'])->name('hide');
+        Route::get('/by-page/{page}', [NoteController::class, 'indexByPage'])->name('indexByPage');
     });
 
 

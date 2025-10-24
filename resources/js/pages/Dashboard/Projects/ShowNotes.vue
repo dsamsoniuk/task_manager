@@ -11,7 +11,17 @@
 
         <div class="m-3">
           <Link :href="`/dashboard/notes/create-by-project/${project.id }`" class="btn btn-accent">Dodaj note</Link>
+          <input type="text" v-model="searchInput" @keyup="loadNotesByPage({page:1})" class="ml-3 input" placeholder="Wyszukaj po tytule">
         </div>
+
+      
+          <div class="m-3">
+            <Pagination 
+            :current-page="noteList.current_page" 
+            :total-pages="noteList.last_page"
+            @run-parent-fn="loadNotesByPage"
+          />
+          </div>
 
         <details v-for="note in noteList.data" :key="note.id" class="collapse bg-base-100 border-base-300 border mb-2" >
           <summary class="collapse-title font-semibold">
@@ -36,7 +46,6 @@
           <Link :href="`/dashboard/notes/create-by-project/${project.id }`" class="btn btn-accent">Dodaj note</Link>
         </div>
           <Pagination 
-            :base-url="noteList.path" 
             :current-page="noteList.current_page" 
             :total-pages="noteList.last_page"
             @run-parent-fn="loadNotesByPage"
@@ -54,12 +63,16 @@ import Pagination from '@/components/Pagination.vue'
 import { ref } from 'vue';
 import axios from 'axios'
 
+const searchInput = ref('')
 const props = defineProps({ notes: Object, project: Object})
 const noteList = ref({ ...props.notes})
 
 async function loadNotesByPage(data) {
+  data.query = searchInput.value ?? ''
+  console.log(data)
   try {
-    const response = await axios.get(`/dashboard/project-notes/${props.project.id}/by-page/${data.page}`)
+    const query = data.query ? `?q=${data.query}` : ''
+    const response = await axios.get(`/dashboard/project-notes/${props.project.id}/by-page/${data.page}/${query}`)
     noteList.value = response.data.notes
   } catch (err) {
     console.log('Nie udało się pobrać danych.')

@@ -9,7 +9,6 @@ use App\Models\Project;
 use App\Repository\NoteRepositoryInterface;
 use App\Repository\ProjectRepositoryInterface;
 use App\Transformer\NoteTransformerInterface;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 
@@ -24,14 +23,17 @@ class NoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $page = (int) $request->get('page', 0);
-        $notes = $this->noteRepo->findByLimit(page: $page, limit: 50);
-
+        $notes = $this->noteRepo->findByLimit(limit: 2);
         return Inertia::render('Dashboard/Notes/Index', [
             'notes' => $notes
         ]);
+    }
+    public function indexByPage(int $page = 1)
+    {
+        $notes = $this->noteRepo->findByLimit(page: $page, limit: 2);
+        return ['notes' => $notes];
     }
 
     /**

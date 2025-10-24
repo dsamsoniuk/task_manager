@@ -52,18 +52,12 @@ class ProjectController extends Controller
             ->with('success', 'Użytkownik dodany!');
     }
 
-    public function showNotes(
-        Request $request, 
-        Project $project, 
-        NoteRepositoryInterface $noteRepo
-    )
+    public function showNotes(Project $project, NoteRepositoryInterface $noteRepo)
     {
-        $page = (int) $request->get('page', 1);
         $notes = $noteRepo->findByVisiblity(
-            true, 
-            $project->id, 
-            $page, 
-            50
+            isVisible: true, 
+            project_id:$project->id, 
+            limit: 50
         );
 
         return Inertia::render('Dashboard/Projects/ShowNotes', [
@@ -71,17 +65,21 @@ class ProjectController extends Controller
             'project' => $project,
         ]);
     }
-    public function notesByPage(Project $project, int $page = 1, NoteRepositoryInterface $noteRepo){
-
+    public function notesByPage(
+        Request $request,
+        Project $project, 
+        NoteRepositoryInterface $noteRepo,
+        int $page = 1
+    ){
+        $query = $request->get('q', '');
         $notes = $noteRepo->findByVisiblity(
             true, 
             $project->id, 
+            $query,
             $page, 
             50
         );
-        return [
-            'notes' => $notes
-        ];
+        return ['notes' => $notes];
     }
 
     /**
