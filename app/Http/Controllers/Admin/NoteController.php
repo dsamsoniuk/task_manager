@@ -27,7 +27,7 @@ class NoteController extends Controller
     public function index(Request $request)
     {
         $page = (int) $request->get('page', 0);
-        $notes = $this->noteRepo->findByLimit(page: $page, limit: 10);
+        $notes = $this->noteRepo->findByLimit(page: $page, limit: 50);
 
         return Inertia::render('Dashboard/Notes/Index', [
             'notes' => $notes

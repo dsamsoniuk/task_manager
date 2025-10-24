@@ -63,7 +63,7 @@ class ProjectController extends Controller
             true, 
             $project->id, 
             $page, 
-            2
+            50
         );
 
         return Inertia::render('Dashboard/Projects/ShowNotes', [
