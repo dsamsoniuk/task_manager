@@ -47,6 +47,13 @@ Route::prefix('dashboard/notes/create-by-project')
         Route::get('/{project}', [NoteController::class, 'createByProject'])->name('createByProject');
     });
 
+Route::prefix('dashboard/notes')
+    ->name('note-hide.')
+    ->middleware(['auth', 'verified'])
+    ->group(function () {
+        Route::put('/{note}/hide', [NoteController::class, 'hide'])->name('hide');
+    });
+
 
 Route::prefix('dashboard')
     ->name('dashboard.')

@@ -25,6 +25,8 @@
                 <Link :href="`/dashboard/notes/${note.id}/edit`" class="text-green-600 hover:underline">Edytuj</Link>
                 <!-- <Link :href="`/dashboard/notes/${note.id}/edit`" class="text-green-600 hover:underline">Ukryj</Link> -->
                 <div>priorytet: {{ note.priority }}</div>
+                <button type="button" @click="hide(note.id)" class="text-orange-600 hover:underline">Ukryj</button>
+                <button type="button" @click="destroy(note.id)" class="text-red-600 hover:underline">Usuń</button>
               </div>
             </div>
           </summary>
@@ -35,6 +37,8 @@
 
         <div class="m-3">
           <Link :href="`/dashboard/notes/create-by-project/${project.id }`" class="btn btn-accent">Dodaj note</Link>
+          <Link :href="`/dashboard/notes/create-by-project/${project.id }`" class="btn btn-accent">Usuń note</Link>
+
         </div>
         
       </div>
@@ -42,10 +46,22 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, router } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/AppLayout.vue';
 import  FlashMessage  from '@/components/FlashMessage.vue'
 
 const props = defineProps({ notes: Object, project: Object})
+
+function destroy(id) {
+  if (confirm('Na pewno chcesz usunąć?')) {
+    router.delete(`/dashboard/notes/${id}`)
+  }
+}
+
+function hide(id) {
+  if (confirm('Na pewno chcesz ukryć?')) {
+    router.put(`/dashboard/notes/${id}/hide`)
+  }
+}
 
 </script>

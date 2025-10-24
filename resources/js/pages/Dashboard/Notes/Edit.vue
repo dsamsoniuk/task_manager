@@ -40,7 +40,17 @@
               <span class="text-red-500">{{ form.errors.is_visible }}</span>
             </fieldset>
           </div>
-
+          
+          <div>
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend">Projekt</legend>
+              <select  v-model="form.project_id" class="input">
+                <option :value="p.id" v-for="p in projectList" >{{ p.name }}</option>
+              </select>
+              <span class="text-red-500">{{ form.errors.is_visible }}</span>
+            </fieldset>
+          </div>
+          
           <button type="submit" class="btn btn-primary mt-4">Zaktualizuj</button>
         </form>
       </div>
@@ -54,6 +64,7 @@ import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
   note: Object,
+  projectList: Object,
 })
 
 const form = useForm({

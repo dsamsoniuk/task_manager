@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateNoteRequest;
 use App\Models\Note;
 use App\Models\Project;
 use App\Repository\NoteRepositoryInterface;
+use App\Repository\ProjectRepositoryInterface;
 use App\Transformer\NoteTransformerInterface;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
@@ -15,6 +16,7 @@ class NoteController extends Controller
 {
     public function __construct(
         private NoteRepositoryInterface $noteRepo,
+        private ProjectRepositoryInterface $projectRepo,
         private NoteTransformerInterface $noteTransformer,
     ){
     }
@@ -35,8 +37,10 @@ class NoteController extends Controller
      */
     public function createByProject(Project $project)
     {
+        $projectList = $this->projectRepo->findAll();
         return Inertia::render('Dashboard/Notes/Create',[
-            'project' => $project
+            'project' => $project,
+            'projectList' => $projectList,
         ]);
     }
     /**
@@ -65,18 +69,20 @@ class NoteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Note $note)
-    {
+    // public function show(Note $note)
+    // {
 
-    }
+    // }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Note $note)
     {
+        $projectList = $this->projectRepo->findAll();
         return Inertia::render('Dashboard/Notes/Edit', [
             'note' => $note,
+            'projectList' => $projectList,
         ]);
     }
 
@@ -103,7 +109,19 @@ class NoteController extends Controller
         $this->noteRepo->delete($note);
 
         return redirect()
-            ->route('dashboard.notes.index')
-            ->with('success', 'Nota usunięty!');
+            ->route('project-notes.showNotes', [
+                'project' => $note->project
+            ])
+            ->with('success', 'Nota usunięty');
+    }
+    public function hide(Note $note)
+    {
+        $this->noteRepo->hide($note);
+
+        return redirect()
+            ->route('project-notes.showNotes', [
+                'project' => $note->project
+            ])
+            ->with('success', 'Nota ukryta');
     }
 }

@@ -9,18 +9,22 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class NoteRepository implements NoteRepositoryInterface
 {
-    public function create(NoteDto $project): Note
+    public function create(NoteDto $note): Note
     {
-        unset($project->id);
-        return Note::create((array) $project);
+        unset($note->id);
+        return Note::create((array) $note);
     }
-    public function update(Note $project, NoteDto $userDto): void
+    public function update(Note $note, NoteDto $userDto): void
     {
-        $project->update((array) $userDto);
+        $note->update((array) $userDto);
     }
-    public function delete(Note $project): void
+    public function delete(Note $note): void
     {
-        $project->delete();
+        $note->delete();
+    }
+    public function hide(Note $note): void
+    {
+        $note->update(['is_visible' => false]);
     }
     public function findByLimit(int $limit = 10): LengthAwarePaginator {
         return (new QueryBuilder())

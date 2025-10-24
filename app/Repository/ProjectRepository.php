@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Dto\ProjectDto;
 use App\Models\Project;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProjectRepository implements ProjectRepositoryInterface
@@ -24,5 +25,8 @@ class ProjectRepository implements ProjectRepositoryInterface
         return (new QueryBuilder())
             ->select(Project::class, 'id', 'name', 'priority')
             ->paginate($limit);
+    }
+    public function findAll(): Collection {
+        return Project::all(['id','name']);
     }
 }
