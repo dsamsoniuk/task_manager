@@ -13,7 +13,16 @@ class ProjectSeeder extends Seeder
     public function run(): void
     {
         Project::factory()->create([
-            'name' => 'Wspólny',
+            'name' => 'Dane do kont aplikacji',
+        ]);
+        // Project::factory()->create([
+        //     'name' => 'Ogolne zadania',
+        // ]);
+        Project::factory()->create([
+            'name' => 'Archiwum',
+        ]);
+        Project::factory()->create([
+            'name' => 'Ważne zadania',
         ]);
     }
 }
