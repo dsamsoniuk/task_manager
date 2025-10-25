@@ -9,10 +9,10 @@ class ProjectTransformer implements ProjectTransformerInterface
 {
     public function toDto(array $data): ProjectDto {
         $project = new ProjectDto(
-            $data['id'] ?? '',
+            $data['id'] ?? null,
             $data['name'] ?? '',
             $data['description'] ?? '',
-            $data['priority'] ?? '',
+            $data['priority'] ?? 0,
         );
         return $project;
     }

@@ -11,6 +11,7 @@ class ProjectRepository implements ProjectRepositoryInterface
 {
     public function create(ProjectDto $project): Project
     {
+        unset($project->id);
         return Project::create((array) $project);
     }
     public function update(Project $project, ProjectDto $userDto): void

@@ -4,7 +4,7 @@ namespace App\Dto;
 
 class ProjectDto {
     public function __construct(
-        public string $id = '', 
+        public int|null $id = null, 
         public string $name = '', 
         public string $description = '', 
         public int $priority = 0, 
