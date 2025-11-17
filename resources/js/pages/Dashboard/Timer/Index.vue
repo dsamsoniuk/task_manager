@@ -3,7 +3,7 @@
 
       <div class="m-4 overflow-x-auto">
         <h1 class="text-xl font-bold mb-4">Czaso-wstrzymywacz pracy</h1>
-
+        <p>Wyświetl powiadomienie po tym czasie</p>
         <div class="m-4">
            <label for="">Podaj czas w minutach</label>
             <br>

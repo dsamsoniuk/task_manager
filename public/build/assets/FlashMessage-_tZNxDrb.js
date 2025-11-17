@@ -1,1 +1,0 @@
-import{z as o,a,o as t,A as r,u as e,t as c}from"./app-DLkP_RaH.js";const n={class:"m-4"},_={key:0,class:"alert alert-success"},l={key:1,class:"alert alert-danger"},h={__name:"FlashMessage",setup(p){const s=o().props.flash;return(i,d)=>(t(),a("div",n,[e(s).success?(t(),a("div",_,c(e(s).success),1)):r("",!0),e(s).error?(t(),a("div",l,c(e(s).error),1)):r("",!0)]))}};export{h as _};
