@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\NoteController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TimerController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,6 +25,7 @@ Route::prefix('dashboard')
     ->middleware(['auth', 'verified'])
     ->group(function () {
         Route::resource('users', UserController::class);
+        Route::resource('timer', TimerController::class);
 });
 
 Route::prefix('dashboard')

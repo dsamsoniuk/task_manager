@@ -22,6 +22,7 @@ import { usePage } from '@inertiajs/vue3'
 import notes from '@/routes/dashboard/notes';
 import projectNotes from '@/routes/project-notes';
 import SidebarGroupLabel from './ui/sidebar/SidebarGroupLabel.vue';
+import timer from '@/routes/dashboard/timer';
 
 const page = usePage()
 const mainNavItems: NavItem[] = [
@@ -40,6 +41,10 @@ const mainNavItems: NavItem[] = [
     },{
         title: 'Notes',
         href: notes.index(),
+        icon: LayoutGrid,
+    },{
+        title: 'Timer',
+        href: timer.index(),
         icon: LayoutGrid,
     }
 ];
