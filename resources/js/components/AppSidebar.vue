@@ -47,7 +47,7 @@ const mainNavItems: NavItem[] = [
 const mainNavProjectsItems: NavItem[] = []
 const projectList = page.props.projectList ?? null
 if (projectList) {
-    for (let p in projectList) {
+    for (const p in projectList) {
         const pro = projectList[p]
         mainNavProjectsItems.push({
             title: pro.name,
