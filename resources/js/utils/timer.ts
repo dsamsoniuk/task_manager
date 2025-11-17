@@ -1,7 +1,7 @@
 import Cookies from '@/utils/cookies'
-import { ref, Ref } from 'vue';
+import { ref } from 'vue';
 
-export default class Timer {
+class Timer {
 
     public clockTimeCounterCookie = 'clockTime'
     public currentTimeInMinuteCookie = 'currentTimeInMinute'
@@ -35,20 +35,15 @@ export default class Timer {
 
     startTimer() {
         var parent = this
-
         this.resetTimer()
         this.clockChecker()
 
         this.cookies.setCookie(this.currentTimeInMinuteCookie, this.currentTimeInMinute.value + '', 1);
-
         this.timer = setInterval(function(){
-
             parent.sendSystemNotification("PRZERWA !!", "Odpocznij chwilę");
             parent.clockTime.value = 0
         }, this.currentTimeInMinute.value * 60 * 1000 )
     }
-
-
 
     sendSystemNotification(title:string, body: string) {
         if (!("Notification" in window)) {
@@ -71,3 +66,9 @@ export default class Timer {
     }
 
 }
+
+// Singleton, przesylamy instancje klasy
+const timer = new Timer();
+timer.clockChecker()
+
+export default timer;

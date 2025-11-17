@@ -23,6 +23,31 @@ import notes from '@/routes/dashboard/notes';
 import projectNotes from '@/routes/project-notes';
 import SidebarGroupLabel from './ui/sidebar/SidebarGroupLabel.vue';
 import timer from '@/routes/dashboard/timer';
+import { onMounted } from 'vue';
+import Cookies from '@/utils/cookies'
+import Timer from '@/utils/timer'
+
+var timerTmpSidebar = NaN
+
+onMounted(() => {
+    var cookies = new Cookies()
+
+    let clockTimeCounter = parseInt( cookies.getCookie(Timer.clockTimeCounterCookie) )
+    let timeInMinute = parseInt( cookies.getCookie(Timer.currentTimeInMinuteCookie) )
+    Timer.clockTime.value = clockTimeCounter
+    Timer.currentTimeInMinute.value = timeInMinute
+
+    if (clockTimeCounter == 0 ) {
+        return
+    }
+    timerTmpSidebar = setInterval(function(){
+        clearInterval(timerTmpSidebar)
+
+        Timer.sendSystemNotification("PRZERWA !!", "Odpocznij chwilę");
+        Timer.startTimer()
+    }, (timeInMinute * 60 * 1000) - (clockTimeCounter * 1000) )
+})
+
 
 const page = usePage()
 const mainNavItems: NavItem[] = [
