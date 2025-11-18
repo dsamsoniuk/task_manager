@@ -6,10 +6,14 @@ use App\Repository\NoteRepository;
 use App\Repository\NoteRepositoryInterface;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectRepositoryInterface;
+use App\Repository\ScheduleRepository;
+use App\Repository\ScheduleRepositoryInterface;
 use App\Transformer\NoteTransformer;
 use App\Transformer\NoteTransformerInterface;
 use App\Transformer\ProjectTransformer;
 use App\Transformer\ProjectTransformerInterface;
+use App\Transformer\ScheduleTransformer;
+use App\Transformer\ScheduleTransformerInterface;
 use App\Transformer\UserTransformer;
 use App\Transformer\UserTransformerInterface;
 use App\Repository\UserRepositoryInterface;
@@ -33,10 +37,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(ProjectRepositoryInterface::class, ProjectRepository::class);
         $this->app->bind(NoteRepositoryInterface::class, NoteRepository::class);
+        $this->app->bind(ScheduleRepositoryInterface::class, ScheduleRepository::class);
 
         $this->app->bind(UserTransformerInterface::class, UserTransformer::class);
         $this->app->bind(ProjectTransformerInterface::class, ProjectTransformer::class);
         $this->app->bind(NoteTransformerInterface::class, NoteTransformer::class);
+        $this->app->bind(ScheduleTransformerInterface::class, ScheduleTransformer::class);
     }
 
     /**

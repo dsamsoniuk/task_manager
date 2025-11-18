@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\NoteController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TimerController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ScheduleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -26,14 +27,11 @@ Route::prefix('dashboard')
     ->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('timer', TimerController::class);
+        Route::resource('schedule', ScheduleController::class);
+        Route::resource('projects', ProjectController::class);
+        Route::resource('notes', NoteController::class);
 });
 
-Route::prefix('dashboard')
-        ->name('dashboard.')
-        ->middleware(['auth', 'verified'])
-        ->group(function () {
-            Route::resource('projects', ProjectController::class);
-    });
 
 Route::prefix('dashboard/project-notes')
     ->name('project-notes.')
@@ -59,12 +57,6 @@ Route::prefix('dashboard/notes')
     });
 
 
-Route::prefix('dashboard')
-    ->name('dashboard.')
-    ->middleware(['auth', 'verified'])
-    ->group(function () {
-        Route::resource('notes', NoteController::class);
-});
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

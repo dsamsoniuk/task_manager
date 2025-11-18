@@ -26,6 +26,7 @@ import timer from '@/routes/dashboard/timer';
 import { onMounted } from 'vue';
 import Cookies from '@/utils/cookies'
 import Timer from '@/utils/timer'
+import schedule from '@/routes/dashboard/schedule';
 
 var timerTmpSidebar = NaN
 
@@ -56,20 +57,25 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
     }, {
-        title: 'Users',
+        title: 'Użytkownicy',
         href: users.index(),
         icon: LayoutGrid,
     },{
-        title: 'Projects',
+        title: 'Projekty',
         href: projects.index(),
         icon: LayoutGrid,
     },{
-        title: 'Notes',
+        title: 'Noty',
         href: notes.index(),
         icon: LayoutGrid,
     },{
-        title: 'Timer',
+        title: 'Stoper',
         href: timer.index(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Harmonogram',
+        href: schedule.index(),
         icon: LayoutGrid,
     }
 ];
