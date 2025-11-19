@@ -14,10 +14,10 @@ class Schedule extends Model
         'work_hours',
     ];
     public static $statusList = [
-        'domyslny'=> 'default',
-        'ok'=> 'success',
-        'info'=> 'info',
-        'slabe'=> 'warning',
-        'trudne'=> 'error',
+        'domyslny'=> 'white',
+        'ok'=> 'green',
+        'info'=> 'blue',
+        'slabe'=> 'orange',
+        'trudne'=> 'red',
     ];
 }

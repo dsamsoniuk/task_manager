@@ -17,10 +17,10 @@
                <hr>
                <br>
               <div  class="flex flex-wrap gap-4">
-
+                <!-- Kolory dynamicznie zadeklarowane w AppLayout, bo PurgeCss je bedzie usuwał i kolor nie zadziała -->
                 <div v-for="schedule in month.list.elements" :key="schedule.id" 
-                   class="card card-md w-50 shadow-sm" 
-                  :class="'bg-' + schedule.status + '', 'text-'+ schedule.status+'-content' "
+                   class="card card-md w-50 shadow-sm " 
+                  :class="'bg-' + schedule.status + '-200', 'text-'+ schedule.status+'-content' "
                 >
                   <div class="card-body">
                     
@@ -48,7 +48,6 @@
           </div>
   
         </div>
-
       </div>
   </AppLayout>
 </template>
