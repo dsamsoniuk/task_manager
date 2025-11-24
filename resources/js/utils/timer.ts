@@ -15,6 +15,7 @@ class Timer {
     constructor(){
         this.cookies = new Cookies()
         this.clockTime = ref<number>(0);
+        this.currentTimeInMinute = ref<number>(20);
     }
 
     clockChecker(){
@@ -39,10 +40,14 @@ class Timer {
         this.clockChecker()
 
         this.cookies.setCookie(this.currentTimeInMinuteCookie, this.currentTimeInMinute.value + '', 1);
-        this.timer = setInterval(function(){
-            parent.sendSystemNotification("PRZERWA !!", "Odpocznij chwilę");
-            parent.clockTime.value = 0
-        }, this.currentTimeInMinute.value * 60 * 1000 )
+        if (typeof this.currentTimeInMinute.value != "number" && this.currentTimeInMinute.value > 0) {
+            console.warn('Brak currentTimeInMinute')
+        }
+
+        // this.timer = setInterval(function(){
+        //     parent.sendSystemNotification("PRZERWA !!", "Odpocznij chwilę");
+        //     parent.clockTime.value = 0
+        // }, this.currentTimeInMinute.value * 60 * 1000 )
     }
 
     sendSystemNotification(title:string, body: string) {

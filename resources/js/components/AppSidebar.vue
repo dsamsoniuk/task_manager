@@ -33,12 +33,12 @@ var timerTmpSidebar = NaN
 onMounted(() => {
     var cookies = new Cookies()
 
-    let clockTimeCounter = parseInt( cookies.getCookie(Timer.clockTimeCounterCookie) )
-    let timeInMinute = parseInt( cookies.getCookie(Timer.currentTimeInMinuteCookie) )
+    let clockTimeCounter = parseInt( cookies.getCookie(Timer.clockTimeCounterCookie) ) || 0
+    let timeInMinute = parseInt( cookies.getCookie(Timer.currentTimeInMinuteCookie) ) || 15
     Timer.clockTime.value = clockTimeCounter
     Timer.currentTimeInMinute.value = timeInMinute
 
-    if (clockTimeCounter == 0 ) {
+    if (clockTimeCounter == 0) {
         return
     }
     timerTmpSidebar = setInterval(function(){
