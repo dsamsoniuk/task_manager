@@ -44,7 +44,7 @@ onMounted(() => {
     timerTmpSidebar = setInterval(function(){
         clearInterval(timerTmpSidebar)
 
-        Timer.sendSystemNotification("PRZERWA !!", "Odpocznij chwilę");
+        Timer.sendSystemNotification();
         Timer.startTimer()
     }, (timeInMinute * 60 * 1000) - (clockTimeCounter * 1000) )
 })

@@ -44,13 +44,16 @@ class Timer {
             console.warn('Brak currentTimeInMinute')
         }
 
-        // this.timer = setInterval(function(){
-        //     parent.sendSystemNotification("PRZERWA !!", "Odpocznij chwilę");
-        //     parent.clockTime.value = 0
-        // }, this.currentTimeInMinute.value * 60 * 1000 )
+        this.timer = setInterval(function(){
+            parent.sendSystemNotification();
+            parent.clockTime.value = 0
+        }, this.currentTimeInMinute.value * 60 * 1000 )
     }
 
-    sendSystemNotification(title:string, body: string) {
+    sendSystemNotification() {
+        var title = "Przerwa 🔔" 
+        var body = "Odpocznij chwilę.....📩🎉"
+
         if (!("Notification" in window)) {
             console.error("Twoja przeglądarka nie wspiera systemowych powiadomień.");
             return;
